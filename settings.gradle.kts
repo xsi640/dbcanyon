@@ -31,3 +31,4 @@ fun defineSubProject(name: String, path: String) {
 }
 
 defineSubProject("app", "app")
+defineSubProject("core", "core")
