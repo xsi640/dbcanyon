@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import com.github.xsi640.dbcanyon.core.AuditEntity
+import com.github.xsi640.dbcanyon.core.UserBase
 
 @TableName("t_database")
 class Database(
@@ -19,8 +20,9 @@ class Database(
     var parameters: Map<String, String?>,
     var description: String,
     @TableField(javaType = true, typeHandler = EntityTypeHandler::class)
-    var ssh: SSHClient = SSHClient()
-) : AuditEntity()
+    var ssh: SSHClient = SSHClient(),
+    override var userId: Long
+) : AuditEntity(), UserBase
 
 class SSHClient(
     var enabled: Boolean = false,
