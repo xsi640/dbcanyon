@@ -1,4 +1,4 @@
-package com.github.xsi640.dbcanyon.core
+package com.github.xsi640.dbcanyon.core.extends
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.JsonNode
@@ -11,7 +11,7 @@ import java.io.File
 import java.io.InputStream
 import java.net.URL
 
-object JsonExtends {
+object Json {
     val mapper = jacksonObjectMapper()
 
     init {
