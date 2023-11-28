@@ -1,4 +1,4 @@
-task("test") {
+task("demo") {
     doLast {
         println("test")
     }

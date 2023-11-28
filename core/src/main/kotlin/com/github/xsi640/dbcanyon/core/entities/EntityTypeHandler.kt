@@ -1,7 +1,7 @@
 package com.github.xsi640.dbcanyon.core.entities
 
-import com.github.xsi640.dbcanyon.core.JsonExtends.toJsonString
-import com.github.xsi640.dbcanyon.core.JsonExtends.toObject
+import com.github.xsi640.dbcanyon.core.extends.Json.toJsonString
+import com.github.xsi640.dbcanyon.core.extends.Json.toObject
 import org.apache.ibatis.type.BaseTypeHandler
 import org.apache.ibatis.type.JdbcType
 import java.sql.CallableStatement
