@@ -32,3 +32,6 @@ fun defineSubProject(name: String, path: String) {
 
 defineSubProject("app", "app")
 defineSubProject("core", "core")
+defineSubProject("database-base", "database-base")
+defineSubProject("database-plugin", "database-plugin")
+defineSubProject("database-plugin-mysql", "plugin/mysql")
