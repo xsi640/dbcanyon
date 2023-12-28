@@ -4,9 +4,9 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.util.Properties
 
-abstract class DefaultSQLConnector : SQLConnector<DatabaseContext> {
+abstract class DefaultSQLConnector : SQLConnector {
 
-    override fun connect(ctx: DatabaseContext): Connection {
+    override fun connect(): Connection {
         val config = ctx.config
         val properties = Properties()
         if (config.username.isNotEmpty()) {

@@ -16,7 +16,7 @@ class Test {
                 type = DatabaseType.MYSQL
             )
         )
-        ctx.databaseModel.databases(ctx).forEach {
+        ctx.databaseModel.databases().forEach {
             println(it.name)
         }
     }

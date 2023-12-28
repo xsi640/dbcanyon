@@ -1,7 +1,9 @@
 package com.github.xsi640.dbcanyon.plugin
 
-abstract class DefaultDatabaseModel : DatabaseModel<DatabaseContext> {
-    override fun databases(ctx: DatabaseContext): List<Database> {
+abstract class DefaultDatabaseModel(
+    override val ctx: DatabaseContext
+) : DatabaseModel {
+    override fun databases(): List<Database> {
         val result = mutableListOf<Database>()
         ctx.connection.metaData.catalogs.use { rs ->
             while (rs.next()) {
@@ -15,7 +17,7 @@ abstract class DefaultDatabaseModel : DatabaseModel<DatabaseContext> {
         return result
     }
 
-    override fun schemas(ctx: DatabaseContext, database: String): List<Schema> {
+    override fun schemas(database: String): List<Schema> {
         val result = mutableListOf<Schema>()
         ctx.connection.metaData.schemas.use { rs ->
             while (rs.next()) {
@@ -29,12 +31,11 @@ abstract class DefaultDatabaseModel : DatabaseModel<DatabaseContext> {
         return result
     }
 
-    override fun tables(ctx: DatabaseContext, database: String, schema: String, table: String): List<Table> {
+    override fun tables(database: String, schema: String, table: String): List<Table> {
         TODO("Not yet implemented")
     }
 
     override fun tableColumns(
-        ctx: DatabaseContext,
         database: String,
         schema: String,
         table: String,

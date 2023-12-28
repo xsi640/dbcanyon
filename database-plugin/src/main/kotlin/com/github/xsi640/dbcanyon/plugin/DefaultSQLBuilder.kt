@@ -2,14 +2,13 @@ package com.github.xsi640.dbcanyon.plugin
 
 const val QUERY_TABLE_ALIAS = "T_CANYON_QUERY"
 
-abstract class DefaultSQLBuilder : SQLBuilder<DatabaseContext> {
+abstract class DefaultSQLBuilder : SQLBuilder {
 
-    override fun createSchema(ctx: DatabaseContext, schema: String): String {
+    override fun createSchema(schema: String): String {
         return "CREATE SCHEMA IF NOT EXISTS $schema"
     }
 
     override fun prepare(
-        ctx: DatabaseContext,
         sql: String,
         where: String,
         order: String,
@@ -33,7 +32,7 @@ abstract class DefaultSQLBuilder : SQLBuilder<DatabaseContext> {
         return sb.toString()
     }
 
-    override fun total(ctx: DatabaseContext, sql: String, where: String): String {
+    override fun total(sql: String, where: String): String {
         val sb = StringBuilder("SELECT COUNT(*) FROM (")
         sb.append(sql).append(") AS $QUERY_TABLE_ALIAS")
         if (where.isNotEmpty()) {

@@ -8,9 +8,9 @@ import java.util.ServiceLoader
 interface DatabaseContext : Closeable {
     val config: ConnectionConfig
 
-    var sqlBuilder: SQLBuilder<DatabaseContext>
-    var sqlConnector: SQLConnector<DatabaseContext>
-    var databaseModel: DatabaseModel<DatabaseContext>
+    var sqlBuilder: SQLBuilder
+    var sqlConnector: SQLConnector
+    var databaseModel: DatabaseModel
     val connection: Connection
     fun execute(sql: String, vararg arg: Any?): ResultSet
 }
@@ -19,11 +19,11 @@ class DefaultDatabaseContext(
     override val config: ConnectionConfig
 ) : DatabaseContext {
 
-    override var databaseModel = plugins[config.type]!!.model()
-    override var sqlBuilder = plugins[config.type]!!.builder()
-    override var sqlConnector = plugins[config.type]!!.connector()
+    override var databaseModel = plugins[config.type]!!.model(this)
+    override var sqlBuilder = plugins[config.type]!!.builder(this)
+    override var sqlConnector = plugins[config.type]!!.connector(this)
     override val connection by lazy {
-        sqlConnector.connect(this)
+        sqlConnector.connect()
     }
 
     override fun execute(sql: String, vararg arg: Any?): ResultSet {

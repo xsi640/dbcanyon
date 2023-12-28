@@ -4,22 +4,18 @@ import com.github.xsi640.dbcanyon.plugin.*
 
 class MySqlPlugin : DatabasePlugin {
 
-    private var connector = MySqlConnector()
-    private var sqlBuilder = MySqlSQLBuilder()
-    private var model = MySqlDatabaseModel()
-
     override val type: DatabaseType
         get() = DatabaseType.MYSQL
 
-    override fun model(): DatabaseModel<DatabaseContext> {
-        return model
+    override fun model(ctx: DatabaseContext): DatabaseModel {
+        return MySqlDatabaseModel(ctx)
     }
 
-    override fun builder(): SQLBuilder<DatabaseContext> {
-        return sqlBuilder
+    override fun builder(ctx: DatabaseContext): SQLBuilder {
+        return MySqlSQLBuilder(ctx)
     }
 
-    override fun connector(): SQLConnector<DatabaseContext> {
-        return connector
+    override fun connector(ctx: DatabaseContext): SQLConnector {
+        return MySqlConnector(ctx)
     }
 }

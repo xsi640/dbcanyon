@@ -7,11 +7,13 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.util.*
 
-class MySqlConnector : DefaultSQLConnector(), SQLConnector<DatabaseContext> {
+class MySqlConnector(
+    override val ctx: DatabaseContext
+) : DefaultSQLConnector(), SQLConnector {
     override val driverClassName: String
         get() = "com.mysql.cj.jdbc.Driver"
 
-    override fun connect(ctx: DatabaseContext): Connection {
+    override fun connect(): Connection {
         val config = ctx.config
         val properties = Properties()
         if (config.username.isNotEmpty()) {

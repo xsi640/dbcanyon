@@ -4,35 +4,38 @@ import java.sql.Connection
 
 interface DatabasePlugin {
     val type: DatabaseType
-    fun model(): DatabaseModel<DatabaseContext>
-    fun builder(): SQLBuilder<DatabaseContext>
-    fun connector(): SQLConnector<DatabaseContext>
+    fun model(ctx: DatabaseContext): DatabaseModel
+    fun builder(ctx: DatabaseContext): SQLBuilder
+    fun connector(ctx: DatabaseContext): SQLConnector
 }
 
-interface DatabaseModel<C : DatabaseContext> {
-    fun databases(ctx: C): List<Database>
-    fun schemas(ctx: C, database: String): List<Schema>
-    fun tables(ctx: C, database: String, schema: String): List<Table> {
-        return tables(ctx, database, schema, "")
+interface DatabaseModel {
+    val ctx: DatabaseContext
+    fun databases(): List<Database>
+    fun schemas(database: String): List<Schema>
+    fun tables(database: String, schema: String): List<Table> {
+        return tables(database, schema, "")
     }
 
-    fun tables(ctx: C, database: String, schema: String, table: String): List<Table>
-    fun tableColumns(ctx: C, database: String, schema: String, table: String): List<TableColumn> {
-        return tableColumns(ctx, database, schema, table, "")
+    fun tables(database: String, schema: String, table: String): List<Table>
+    fun tableColumns(database: String, schema: String, table: String): List<TableColumn> {
+        return tableColumns(database, schema, table, "")
     }
 
-    fun tableColumns(ctx: C, database: String, schema: String, table: String, column: String): List<TableColumn>
+    fun tableColumns(database: String, schema: String, table: String, column: String): List<TableColumn>
     fun metaDataNames(vararg name: String): String
 }
 
-interface SQLBuilder<C : DatabaseContext> {
-    fun prepare(ctx: C, sql: String, where: String, order: String, offset: Long, limit: Long): String
-    fun total(ctx: C, sql: String, where: String): String
-    fun createSchema(ctx: C, schema: String): String
-    fun createTable(ctx: C, schema: String, table: String): String
+interface SQLBuilder {
+    val ctx: DatabaseContext
+    fun prepare(sql: String, where: String, order: String, offset: Long, limit: Long): String
+    fun total(sql: String, where: String): String
+    fun createSchema(schema: String): String
+    fun createTable(schema: String, table: String): String
 }
 
-interface SQLConnector<C : DatabaseContext> {
+interface SQLConnector {
+    val ctx: DatabaseContext
     val driverClassName: String
-    fun connect(ctx: C): Connection
+    fun connect(): Connection
 }
