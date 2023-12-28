@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import com.github.xsi640.dbcanyon.core.AuditEntity
-import com.github.xsi640.dbcanyon.core.UserBase
+import com.github.xsi640.dbcanyon.core.GroupBase
 
-@TableName("t_database")
+@TableName
 class Database(
     @TableId
     var id: Long,
@@ -21,8 +21,8 @@ class Database(
     var description: String,
     @TableField(javaType = true, typeHandler = EntityTypeHandler::class)
     var ssh: SSHClient = SSHClient(),
-    override var userId: Long
-) : AuditEntity(), UserBase
+    override var groupId: Long
+) : AuditEntity(), GroupBase
 
 class SSHClient(
     var enabled: Boolean = false,
@@ -35,7 +35,7 @@ class SSHClient(
     var timeout: Int = 30000,
 )
 
-
-class DatabaseType {
-
+enum class DatabaseType {
+    MYSQL,
+    POSTGRESQL,
 }

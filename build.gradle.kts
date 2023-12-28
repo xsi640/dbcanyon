@@ -24,8 +24,8 @@ allprojects {
 
     group = "com.github.xsi640"
     version = "1.0.0"
-    java.sourceCompatibility = JavaVersion.VERSION_21
-    java.targetCompatibility = JavaVersion.VERSION_21
+    java.sourceCompatibility = JavaVersion.VERSION_17
+    java.targetCompatibility = JavaVersion.VERSION_17
 
 
     val vers = mapOf(
@@ -73,7 +73,7 @@ allprojects {
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = "21"
+            jvmTarget = "17"
         }
     }
 
@@ -83,4 +83,4 @@ allprojects {
     bootJar.enabled = false
 }
 
-apply(from = rootProject.file("buildscript/root.gradle.kts"))
+//apply(from = rootProject.file("buildscript/root.gradle.kts"))
