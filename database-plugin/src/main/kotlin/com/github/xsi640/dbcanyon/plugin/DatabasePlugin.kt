@@ -11,6 +11,7 @@ interface DatabasePlugin {
 
 interface DatabaseModel {
     val ctx: DatabaseContext
+    val metadataQuote: Char
     fun databases(): List<Database>
     fun schemas(database: String): List<Schema>
     fun tables(database: String, schema: String): List<Table> {

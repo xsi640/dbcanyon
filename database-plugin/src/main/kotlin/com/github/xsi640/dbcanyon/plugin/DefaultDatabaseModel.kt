@@ -3,6 +3,10 @@ package com.github.xsi640.dbcanyon.plugin
 abstract class DefaultDatabaseModel(
     override val ctx: DatabaseContext
 ) : DatabaseModel {
+
+    override val metadataQuote: Char
+        get() = '"'
+
     override fun databases(): List<Database> {
         val result = mutableListOf<Database>()
         ctx.connection.metaData.catalogs.use { rs ->
@@ -31,22 +35,21 @@ abstract class DefaultDatabaseModel(
         return result
     }
 
-    override fun tables(database: String, schema: String, table: String): List<Table> {
-        TODO("Not yet implemented")
-    }
-
-    override fun tableColumns(
-        database: String,
-        schema: String,
-        table: String,
-        column: String
-    ): List<TableColumn> {
-        TODO("Not yet implemented")
-    }
-
     override fun metaDataNames(vararg name: String): String {
-        return name.joinToString(separator = ".", prefix = "`", postfix = "`", transform = {
-            it.trim('`', '"', '\'')
+        val quote = metadataQuote.toString()
+        return name.joinToString(separator = ".", prefix = quote, postfix = quote, transform = {
+            it.trim(*maybeQuote)
         })
+    }
+
+    companion object {
+        val maybeQuote = charArrayOf('`', '"', '\'')
+        val TABLE_TYPES = arrayOf("TABLE", "SYSTEM TABLE")
+        val SCHEMA_TABLE = "SELECT TABLE_NAME, TABLE_COMMENT FROM information_schema.tables WHERE table_schema=?"
+        val SCHEMA_COLUMN = """
+            SELECT COLUMN_NAME, COLUMN_DEFAULT ,IS_NULLABLE ,DATA_TYPE, CHARACTER_MAXIMUM_LENGTH ,NUMERIC_PRECISION ,NUMERIC_SCALE,COLUMN_TYPE ,COLUMN_KEY ,EXTRA 
+            FROM information_schema.columns
+            WHERE table_schema=? AND table_name=? AND ;
+        """.trimIndent()
     }
 }

@@ -9,7 +9,7 @@ class MySqlSQLBuilder(
     override fun createTable(schema: String, table: String): String {
         val model = ctx.databaseModel
         var result = ""
-        ctx.execute("show create table ${model.metaDataNames(schema, table)}").use { rs ->
+        ctx.execute("SHOW CREATE TABLE ${model.metaDataNames(schema, table)}").use { rs ->
             if (rs.next()) {
                 result = rs.getString(2)
             }

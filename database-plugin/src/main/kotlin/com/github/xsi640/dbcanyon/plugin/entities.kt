@@ -75,42 +75,50 @@ open class DefaultSchema(
 
 interface Table {
     var name: String
+    var schemaName: String
     var comment: String
     var columnList: MutableList<TableColumn>
 }
 
 open class DefaultTable : Table {
     override var name: String = ""
+    override var schemaName: String = ""
     override var comment: String = ""
     override var columnList: MutableList<TableColumn> = mutableListOf()
 }
 
 interface TableColumn {
+    var schemaName: String
+    var tableName: String
     var name: String
+    var type: String
     var dataType: String
     var defaultValue: String
     var autoIncrement: Boolean
     var primaryKey: Boolean
-    var length: Int
+    var length: Long
     var nullable: Boolean
-    var generated: Boolean
-    var numericPrecision: Int
-    var numericScale: Int
+    var generation: String
+    var numericPrecision: Long
+    var numericScale: Long
+    var position: Long
     var comment: String
-    var charset: String
 }
 
 open class DefaultTableColumn : TableColumn {
+    override var schemaName: String = ""
+    override var tableName: String = ""
     override var name: String = ""
+    override var type: String = ""
     override var dataType: String = ""
     override var defaultValue: String = ""
     override var autoIncrement: Boolean = false
     override var primaryKey: Boolean = false
-    override var length: Int = 0
+    override var length: Long = 0L
     override var nullable: Boolean = false
-    override var generated: Boolean = false
-    override var numericPrecision: Int = 0
-    override var numericScale: Int = 0
+    override var generation: String = ""
+    override var numericPrecision: Long = 0L
+    override var numericScale: Long = 0L
+    override var position: Long = 0L
     override var comment: String = ""
-    override var charset: String = ""
 }
