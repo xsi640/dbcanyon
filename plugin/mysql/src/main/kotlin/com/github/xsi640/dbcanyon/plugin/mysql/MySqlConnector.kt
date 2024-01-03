@@ -2,14 +2,13 @@ package com.github.xsi640.dbcanyon.plugin.mysql
 
 import com.github.xsi640.dbcanyon.plugin.DatabaseContext
 import com.github.xsi640.dbcanyon.plugin.DefaultSQLConnector
-import com.github.xsi640.dbcanyon.plugin.SQLConnector
 import java.sql.Connection
 import java.sql.DriverManager
 import java.util.*
 
 class MySqlConnector(
     override val ctx: DatabaseContext
-) : DefaultSQLConnector(), SQLConnector {
+) : DefaultSQLConnector() {
     override val driverClassName: String
         get() = "com.mysql.cj.jdbc.Driver"
 
