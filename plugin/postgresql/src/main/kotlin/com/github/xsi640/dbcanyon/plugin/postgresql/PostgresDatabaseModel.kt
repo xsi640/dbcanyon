@@ -18,7 +18,7 @@ class PostgresDatabaseModel(
             FROM
                 pg_tables
                 LEFT JOIN pg_description ON pg_tables.tablename::regclass = pg_description.objoid
-            where 1=1 and
+            where 1=1
         """.trimIndent()
         if (schema.isNotEmpty()) {
             sql += " AND schemaname = '${schema}'"
@@ -41,7 +41,24 @@ class PostgresDatabaseModel(
 
     override fun tableColumns(database: String, schema: String, table: String, column: String): List<TableColumn> {
         val result = mutableListOf<TableColumn>()
-        TODO()
+        var sql = """
+            select * FROM information_schema.columns
+            WHERE 1=1
+        """.trimIndent()
+        if (schema.isNotEmpty()) {
+            sql += " AND table_schema = '${schema}'"
+        }
+        if (table.isNotEmpty()) {
+            sql += " AND table_name = '${table}'"
+        }
+        ctx.execute(sql).use { rs ->
+            val column = DefaultTableColumn()
+            column.schemaName = schema
+            column.tableName = table
+            column.name = rs.getString("column_name")
+            column.type = rs.getString("data_type")
+            column.type = rs.getString("udt_name")
+        }
         return result
     }
 }

@@ -56,12 +56,16 @@ class MySqlDatabaseModel(override val ctx: DatabaseContext) : DefaultDatabaseMod
                 tableColumn.name = rs.getString("COLUMN_NAME")
                 tableColumn.type = rs.getString("COLUMN_TYPE")
                 tableColumn.dataType = rs.getString("DATA_TYPE")
-                tableColumn.defaultValue = rs.getString("COLUMN_DEFAULT") ?: ""
-                tableColumn.autoIncrement = rs.getString("EXTRA") == "auto_increment"
+                tableColumn.defaultValue = rs.getString("COLUMN_DEFAULT")
+                tableColumn.autoIncrement = rs.getString("EXTRA").contains("auto_increment")
                 tableColumn.primaryKey = rs.getString("COLUMN_KEY") == "PRI"
                 tableColumn.length = rs.getLong("CHARACTER_MAXIMUM_LENGTH")
                 tableColumn.nullable = rs.getString("IS_NULLABLE") == "YES"
-                tableColumn.generation = rs.getString("GENERATION_EXPRESSION") ?: ""
+                tableColumn.generation = if (rs.getString("EXTRA").contains("GENERATED")) {
+                    rs.getString("GENERATION_EXPRESSION") ?: ""
+                } else {
+                    null
+                }
                 tableColumn.numericPrecision = rs.getLong("NUMERIC_PRECISION")
                 tableColumn.numericScale = rs.getLong("NUMERIC_SCALE")
                 tableColumn.position = rs.getLong("ORDINAL_POSITION")

@@ -93,12 +93,12 @@ interface TableColumn {
     var name: String
     var type: String
     var dataType: String
-    var defaultValue: String
+    var defaultValue: String?
     var autoIncrement: Boolean
     var primaryKey: Boolean
     var length: Long
     var nullable: Boolean
-    var generation: String
+    var generation: String?
     var numericPrecision: Long
     var numericScale: Long
     var position: Long
@@ -111,12 +111,12 @@ open class DefaultTableColumn : TableColumn {
     override var name: String = ""
     override var type: String = ""
     override var dataType: String = ""
-    override var defaultValue: String = ""
+    override var defaultValue: String? = null
     override var autoIncrement: Boolean = false
     override var primaryKey: Boolean = false
     override var length: Long = 0L
     override var nullable: Boolean = false
-    override var generation: String = ""
+    override var generation: String? = null
     override var numericPrecision: Long = 0L
     override var numericScale: Long = 0L
     override var position: Long = 0L
