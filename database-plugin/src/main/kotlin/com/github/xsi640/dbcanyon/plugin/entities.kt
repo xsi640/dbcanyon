@@ -76,14 +76,14 @@ open class DefaultSchema(
 interface Table {
     var name: String
     var schemaName: String
-    var comment: String
+    var comment: String?
     var columnList: MutableList<TableColumn>
 }
 
 open class DefaultTable : Table {
     override var name: String = ""
     override var schemaName: String = ""
-    override var comment: String = ""
+    override var comment: String? = null
     override var columnList: MutableList<TableColumn> = mutableListOf()
 }
 
@@ -102,7 +102,7 @@ interface TableColumn {
     var numericPrecision: Long
     var numericScale: Long
     var position: Long
-    var comment: String
+    var comment: String?
 }
 
 open class DefaultTableColumn : TableColumn {
@@ -120,5 +120,5 @@ open class DefaultTableColumn : TableColumn {
     override var numericPrecision: Long = 0L
     override var numericScale: Long = 0L
     override var position: Long = 0L
-    override var comment: String = ""
+    override var comment: String? = null
 }

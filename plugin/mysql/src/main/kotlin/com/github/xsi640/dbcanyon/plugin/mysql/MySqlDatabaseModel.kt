@@ -69,7 +69,7 @@ class MySqlDatabaseModel(override val ctx: DatabaseContext) : DefaultDatabaseMod
                 tableColumn.numericPrecision = rs.getLong("NUMERIC_PRECISION")
                 tableColumn.numericScale = rs.getLong("NUMERIC_SCALE")
                 tableColumn.position = rs.getLong("ORDINAL_POSITION")
-                tableColumn.comment = rs.getString("COLUMN_COMMENT") ?: ""
+                tableColumn.comment = rs.getString("COLUMN_COMMENT")
                 result.add(tableColumn)
             }
         }
