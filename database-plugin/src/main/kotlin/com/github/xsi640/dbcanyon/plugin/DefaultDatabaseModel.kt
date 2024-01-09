@@ -44,12 +44,5 @@ abstract class DefaultDatabaseModel(
 
     companion object {
         val maybeQuote = charArrayOf('`', '"', '\'')
-        val TABLE_TYPES = arrayOf("TABLE", "SYSTEM TABLE")
-        val SCHEMA_TABLE = "SELECT TABLE_NAME, TABLE_COMMENT FROM information_schema.tables WHERE table_schema=?"
-        val SCHEMA_COLUMN = """
-            SELECT COLUMN_NAME, COLUMN_DEFAULT ,IS_NULLABLE ,DATA_TYPE, CHARACTER_MAXIMUM_LENGTH ,NUMERIC_PRECISION ,NUMERIC_SCALE,COLUMN_TYPE ,COLUMN_KEY ,EXTRA 
-            FROM information_schema.columns
-            WHERE table_schema=? AND table_name=? AND ;
-        """.trimIndent()
     }
 }

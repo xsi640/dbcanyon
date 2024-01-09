@@ -43,7 +43,7 @@ enum class DatabaseType(val code: Int) {
 
     companion object {
         fun codeOf(code: Int): DatabaseType {
-            return values().first { it.code == code }
+            return entries.first { it.code == code }
         }
     }
 }
