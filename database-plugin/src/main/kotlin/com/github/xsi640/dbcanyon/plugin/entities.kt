@@ -25,25 +25,25 @@ class SSHConfig(
 )
 
 enum class DatabaseType(val code: Int) {
-    POSTGRESQL(0),
-    MYSQL(1),
-    CLICKHOUSE(2),
-    H2(3),
-    ORACLE(4),
-    SQLSERVER(5),
+    MYSQL(0),
+    POSTGRESQL(1),
+    MARIADB(2),
+    ORACLE(3),
+    SQLSERVER(4),
+    H2(5),
     SQLITE(6),
-    MARIADB(7),
-    DM(8),
-    PRESTO(9),
-    DB2(10),
-    REDIS(11),
-    HIVE(12),
+    DM(7),
+    DB2(8),
+    HIVE(9),
+    PRESTO(10),
+    CLICKHOUSE(11),
+    REDIS(12),
     MONGODB(13);
 
 
     companion object {
         fun codeOf(code: Int): DatabaseType {
-            return entries.first { it.code == code }
+            return values().first { it.code == code }
         }
     }
 }

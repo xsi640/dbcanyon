@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import com.github.xsi640.dbcanyon.core.AuditEntity
 import com.github.xsi640.dbcanyon.core.GroupBase
+import com.github.xsi640.dbcanyon.plugin.DatabaseType
 
 @TableName
 class Database(
@@ -34,8 +35,3 @@ class SSHClient(
     var passphrase: String = "",
     var timeout: Int = 30000,
 )
-
-enum class DatabaseType {
-    MYSQL,
-    POSTGRESQL,
-}
