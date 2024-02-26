@@ -7,6 +7,7 @@ class ConnectionConfig(
     var username: String = "",
     var password: String = "",
     var type: DatabaseType = DatabaseType.POSTGRESQL,
+    var driver: String = "",
     var host: String = "",
     var port: String = "",
     var ssh: SSHConfig? = null,
@@ -121,4 +122,13 @@ open class DefaultTableColumn : TableColumn {
     override var numericScale: Long = 0L
     override var position: Long = 0L
     override var comment: String? = null
+}
+
+open class DefaultDatabaseDriver : DatabaseDriver {
+    override val name: String = ""
+    override val url: String = ""
+    override val parameters: Map<String, String> = emptyMap()
+    override val files: Set<String> = emptySet()
+    override val className: String = ""
+    override val default: Boolean = false
 }

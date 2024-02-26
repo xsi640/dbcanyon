@@ -6,6 +6,10 @@ class PostgresPlugin : DatabasePlugin {
     override val type: DatabaseType
         get() = DatabaseType.POSTGRESQL
 
+    override fun drivers(): List<DatabaseDriver> {
+        return this::class.java.classLoader.drivers("postgresql.yaml")
+    }
+
     override fun model(ctx: DatabaseContext): DatabaseModel {
         return PostgresDatabaseModel(ctx)
     }

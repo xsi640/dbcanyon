@@ -1,0 +1,8 @@
+---
+- name: "mariadb-java-client-3.3.3.jar"
+  url: "jdbc:mariadb://{HOST}:{PORT}/{DATABASE}"
+  parameters: {}
+  files:
+    - "mariadb-java-client-3.3.3.jar"
+  className: "org.mariadb.jdbc.Driver"
+  default: true

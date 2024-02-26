@@ -9,9 +9,6 @@ import java.util.*
 class MySqlConnector(
     override val ctx: DatabaseContext
 ) : DefaultSQLConnector() {
-    override val driverClassName: String
-        get() = "com.mysql.cj.jdbc.Driver"
-
     override fun connect(): Connection {
         val config = ctx.config
         val properties = Properties()
@@ -27,7 +24,7 @@ class MySqlConnector(
         if (!properties.containsKey("useSSL")) {
             properties["useSSL"] = "false"
         }
-        Class.forName(driverClassName)
+        Class.forName(ctx.driver.className)
         return DriverManager.getConnection(config.url, properties)
     }
 }

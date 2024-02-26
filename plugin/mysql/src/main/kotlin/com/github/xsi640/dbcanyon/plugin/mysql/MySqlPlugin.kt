@@ -7,6 +7,10 @@ class MySqlPlugin : DatabasePlugin {
     override val type: DatabaseType
         get() = DatabaseType.MYSQL
 
+    override fun drivers(): List<DatabaseDriver> {
+        return this::class.java.classLoader.drivers("mysql.yaml")
+    }
+
     override fun model(ctx: DatabaseContext): DatabaseModel {
         return MySqlDatabaseModel(ctx)
     }

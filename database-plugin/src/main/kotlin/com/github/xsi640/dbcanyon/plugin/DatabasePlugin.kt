@@ -4,6 +4,8 @@ import java.sql.Connection
 
 interface DatabasePlugin {
     val type: DatabaseType
+
+    fun drivers(): List<DatabaseDriver>
     fun model(ctx: DatabaseContext): DatabaseModel
     fun builder(ctx: DatabaseContext): SQLBuilder
     fun connector(ctx: DatabaseContext): SQLConnector
@@ -37,6 +39,14 @@ interface SQLBuilder {
 
 interface SQLConnector {
     val ctx: DatabaseContext
-    val driverClassName: String
     fun connect(): Connection
+}
+
+interface DatabaseDriver {
+    val name: String
+    val url: String
+    val parameters: Map<String, String>
+    val files: Set<String>
+    val className: String
+    val default: Boolean
 }

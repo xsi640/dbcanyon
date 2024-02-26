@@ -6,6 +6,4 @@ import com.github.xsi640.dbcanyon.plugin.DefaultSQLConnector
 class PostgresConnector(
     override val ctx: DatabaseContext
 ) : DefaultSQLConnector() {
-    override val driverClassName: String
-        get() = "org.postgresql.Driver"
 }

@@ -18,7 +18,7 @@ abstract class DefaultSQLConnector : SQLConnector {
         if (config.parameters.isNotEmpty()) {
             config.parameters.forEach { (k, v) -> properties[k] = v }
         }
-        Class.forName(driverClassName)
+        Class.forName(ctx.driver.className)
         return DriverManager.getConnection(config.url, properties)
     }
 }

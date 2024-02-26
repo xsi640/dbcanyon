@@ -8,6 +8,7 @@ import java.util.ServiceLoader
 interface DatabaseContext : Closeable {
     val config: ConnectionConfig
 
+    val driver: DatabaseDriver
     var sqlBuilder: SQLBuilder
     var sqlConnector: SQLConnector
     var databaseModel: DatabaseModel
@@ -19,6 +20,9 @@ class DefaultDatabaseContext(
     override val config: ConnectionConfig
 ) : DatabaseContext {
 
+    override val driver by lazy {
+        plugins[config.type]!!.drivers().first { config.driver == it.name }
+    }
     override var databaseModel = plugins[config.type]!!.model(this)
     override var sqlBuilder = plugins[config.type]!!.builder(this)
     override var sqlConnector = plugins[config.type]!!.connector(this)

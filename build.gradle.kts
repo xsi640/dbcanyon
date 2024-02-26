@@ -32,6 +32,7 @@ allprojects {
         "commons_io" to "2.11.0",
         "commons_codec" to "1.15",
         "commons_lang" to "3.12.0",
+        "yaml" to "2.16.1"
     )
 
     rootProject.extra.set("vers", vers)
@@ -42,6 +43,7 @@ allprojects {
         implementation("commons-io:commons-io:${vers["commons_io"]}")
         implementation("commons-codec:commons-codec:${vers["commons_codec"]}")
         implementation("org.apache.commons:commons-lang3:${vers["commons_lang"]}")
+        implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${vers["yaml"]}")
 
         implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

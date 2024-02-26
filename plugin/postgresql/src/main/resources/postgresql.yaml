@@ -1,0 +1,8 @@
+---
+- name: "postgresql-42.7.2.jar"
+  url: "postgresql://{HOST}:{PORT}/{DATABASE}"
+  parameters: {}
+  files:
+    - "postgresql-42.7.2.jar"
+  className: "org.postgresql.Driver"
+  default: true

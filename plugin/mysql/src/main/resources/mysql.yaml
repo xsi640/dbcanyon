@@ -1,0 +1,15 @@
+---
+- name: "mysql-connector-java-8.0.33.jar"
+  url: "jdbc:mysql://{HOST}:{PORT}/{DATABASE}"
+  parameters: {}
+  files:
+    - "mysql-connector-java-8.0.33.jar"
+  className: "com.mysql.cj.jdbc.Driver"
+  default: true
+- name: "mysql-connector-java-5.1.49.jar"
+  url: "jdbc:mysql://{HOST}:{PORT}/{DATABASE}"
+  parameters: {}
+  files:
+    - "mysql-connector-java-5.1.48.jar"
+  className: "com.mysql.jdbc.Driver"
+  default: false

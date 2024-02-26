@@ -7,6 +7,6 @@ class PostgresSQLBuilder(
     override val ctx: DatabaseContext
 ) : DefaultSQLBuilder() {
     override fun createTable(schema: String, table: String): String {
-        TODO("Not yet implemented")
+        TODO()
     }
 }

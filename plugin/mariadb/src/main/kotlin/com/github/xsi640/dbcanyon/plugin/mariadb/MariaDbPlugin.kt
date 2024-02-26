@@ -6,6 +6,10 @@ class MariaDbPlugin : DatabasePlugin {
     override val type: DatabaseType
         get() = DatabaseType.MARIADB
 
+    override fun drivers(): List<DatabaseDriver> {
+        return this::class.java.classLoader.drivers("mariadb.yaml")
+    }
+
     override fun model(ctx: DatabaseContext): DatabaseModel {
         return MariaDbDatabaseModel(ctx)
     }
